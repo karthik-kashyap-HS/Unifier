@@ -1,0 +1,8 @@
+2025-04-11 13:38:58,079 - App.file_processor - INFO - Processing csv file: Copy of Encore MSS Items.csv
+2025-04-11 13:38:58,184 - App.file_processor - INFO - Saved processed data to: processed\Copy of Encore MSS Items.csv
+2025-04-11 13:38:58,217 - App.file_processor - INFO - Processing excel file: Copy of Encore Partner Master DRAFT.xlsx
+2025-04-11 13:38:59,370 - App.file_processor - INFO - Saved processed data to: processed\Copy of Encore Partner Master DRAFT.csv
+2025-04-11 13:38:59,412 - App.file_processor - INFO - Processing excel file: Copy of Sample Report - 2024 Halloween Harvest Sell Thru 09.22.24.xlsx
+2025-04-11 13:39:04,349 - App.file_processor - INFO - Saved processed data to: processed\Copy of Sample Report - 2024 Halloween Harvest Sell Thru 09.22.24.csv
+2025-04-11 13:39:04,400 - App.file_processor - INFO - Processing pdf file: test.pdf
+2025-04-11 13:39:10,078 - App.file_processor - ERROR - Failed to process test.pdf: No tables found in PDF

@@ -1,0 +1,9 @@
+2025-04-11 16:22:19,394 - App.file_processor - INFO - Processing csv file: Copy of Encore MSS Items.csv
+2025-04-11 16:22:19,444 - App.file_processor - INFO - Saved processed data to: processed\Copy of Encore MSS Items.csv
+2025-04-11 16:22:19,446 - App.file_processor - INFO - Processing excel file: Copy of Encore Partner Master DRAFT.xlsx
+2025-04-11 16:22:20,416 - App.file_processor - INFO - Saved processed data to: processed\Copy of Encore Partner Master DRAFT.csv
+2025-04-11 16:22:20,418 - App.file_processor - INFO - Processing excel file: Copy of Sample Report - 2024 Halloween Harvest Sell Thru 09.22.24.xlsx
+2025-04-11 16:22:25,272 - App.file_processor - INFO - Saved processed data to: processed\Copy of Sample Report - 2024 Halloween Harvest Sell Thru 09.22.24.csv
+2025-04-11 16:22:25,289 - App.file_processor - INFO - Processing pdf file: tests.pdf
+2025-04-11 16:22:25,889 - App.file_processor - ERROR - PDF extraction failed: 'FileProcessor' object has no attribute '_clean_pdf_data'
+2025-04-11 16:22:25,889 - App.file_processor - ERROR - Failed to process tests.pdf: Could not extract table from PDF: 'FileProcessor' object has no attribute '_clean_pdf_data'

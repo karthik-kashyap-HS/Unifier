@@ -1,0 +1,8 @@
+2025-04-11 14:44:28,279 - App.file_processor - INFO - Processing csv file: Copy of Encore MSS Items.csv
+2025-04-11 14:44:28,337 - App.file_processor - INFO - Saved processed data to: processed\Copy of Encore MSS Items.csv
+2025-04-11 14:44:28,354 - App.file_processor - INFO - Processing excel file: Copy of Encore Partner Master DRAFT.xlsx
+2025-04-11 14:44:28,843 - App.file_processor - INFO - Saved processed data to: processed\Copy of Encore Partner Master DRAFT.csv
+2025-04-11 14:44:28,867 - App.file_processor - INFO - Processing excel file: Copy of Sample Report - 2024 Halloween Harvest Sell Thru 09.22.24.xlsx
+2025-04-11 14:44:31,802 - App.file_processor - INFO - Saved processed data to: processed\Copy of Sample Report - 2024 Halloween Harvest Sell Thru 09.22.24.csv
+2025-04-11 14:44:31,818 - App.file_processor - INFO - Processing pdf file: sample_pdf_test.pdf
+2025-04-11 14:44:34,134 - App.file_processor - INFO - Saved processed data to: processed\sample_pdf_test.csv
