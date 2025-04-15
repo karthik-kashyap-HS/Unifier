@@ -12,18 +12,18 @@ def main():
     Path(output_dir).mkdir(exist_ok=True)
     
     # Process files
-    print("🚀 Starting file processing...")
+    print(" Starting file processing...")
     processor = FileProcessor()
     results = processor.process(input_path, output_dir)
     
     # Print summary
     success = sum(1 for r in results.values() if r['status'] == 'success')
-    print(f"\n📊 Processed {len(results)} files ({success} successful)")
+    print(f"\n Processed {len(results)} files ({success} successful)")
     
     # Detailed results
-    print("\n🔍 File Details:")
+    print("\n File Details:")
     for filename, result in results.items():
-        status = "✅" if result['status'] == 'success' else "❌"
+        status = "processed" if result['status'] == 'success' else "Failed"
         print(f"\n{status} {filename}")
         print(f"Type: {result.get('file_type', 'unknown')}")
         print(f"Status: {result['status'].upper()}")
