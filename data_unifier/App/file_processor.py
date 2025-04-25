@@ -1,8 +1,10 @@
 import pandas as pd
 from pathlib import Path
 from typing import Dict, Union
-from App.utils.logger import get_logger
-from App.utils.file_validators import FileValidator
+from app.utils.logger import get_logger
+from app.utils.file_validators import FileValidator
+from app.utils.spreadsheet_transformer import SpreadsheetTransformer
+
 
 logger = get_logger(__name__)
 
@@ -65,14 +67,22 @@ class FileProcessor:
         return result
     
     def _load_file(self, file_path: Path, file_type: str) -> pd.DataFrame:
-        """Load file based on type"""
+        """Load file based on type with wide-to-long transformation"""
+        from app.utils.data_transformer import DataTransformer
+        
+        df = None
         if file_type == 'csv':
-            return pd.read_csv(file_path)
+            df = pd.read_csv(file_path)
         elif file_type == 'excel':
-            return self._load_excel(file_path)
+            df = self._load_excel(file_path)
         elif file_type == 'pdf':
-            return self._load_pdf(file_path)
-        raise ValueError(f"No loader for file type: {file_type}")
+            df = self._load_pdf(file_path)
+        else:
+            raise ValueError(f"No loader for file type: {file_type}")
+        
+        # Apply transformation to normalize location data
+        return DataTransformer.transform_wide_to_long(df)
+
     
     def _load_excel(self, file_path: Path) -> pd.DataFrame:
         """Load Excel file, combining all sheets"""
@@ -91,3 +101,46 @@ class FileProcessor:
         if not tables:
             raise ValueError("No tables found in PDF")
         return pd.concat([table.df for table in tables])
+    
+    def _load_excel(self, file_path: Path) -> pd.DataFrame:
+        """Load Excel file, combining all sheets with handling for duplicate columns"""
+        xls = pd.ExcelFile(file_path)
+        dfs = []
+        
+        for sheet_name in xls.sheet_names:
+            try:
+                # Read the sheet
+                df = pd.read_excel(xls, sheet_name=sheet_name)
+                
+                # Check for and handle duplicate column names
+                if not df.columns.is_unique:
+                    # Find duplicate columns
+                    duplicated = df.columns[df.columns.duplicated()].tolist()
+                    logger.warning(f"Sheet '{sheet_name}' has duplicate column names: {duplicated}")
+                    
+                    # Rename duplicate columns with numeric suffix
+                    new_cols = []
+                    seen = {}
+                    for col in df.columns:
+                        if col in seen:
+                            seen[col] += 1
+                            new_cols.append(f"{col}_{seen[col]}")
+                        else:
+                            seen[col] = 0
+                            new_cols.append(col)
+                    df.columns = new_cols
+                
+                # Add sheet name column and reset index
+                df['_sheet'] = sheet_name
+                df = df.reset_index(drop=True)
+                dfs.append(df)
+                
+            except Exception as e:
+                logger.error(f"Error processing sheet '{sheet_name}': {str(e)}")
+                # Continue with other sheets instead of failing completely
+        
+        if not dfs:
+            raise ValueError("No valid sheets found in Excel file")
+        
+        # Concatenate with ignore_index to ensure uniqueness
+        return pd.concat(dfs, ignore_index=True)
